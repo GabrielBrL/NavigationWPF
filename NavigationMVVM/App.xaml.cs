@@ -1,0 +1,30 @@
+﻿using NavigationMVVM.Stores;
+using NavigationMVVM.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+
+namespace NavigationMVVM
+{
+    /// <summary>
+    /// Interação lógica para App.xaml
+    /// </summary>
+    public partial class App : Application
+    {
+        protected override void OnStartup(StartupEventArgs e)
+        {            
+            AccountStore accountStore = new AccountStore();
+            NavigationStore navigationStore = new NavigationStore();
+            navigationStore.CurrentViewModel = new HomeViewModel(accountStore, navigationStore);
+            MainWindow = new MainWindow()
+            {
+                DataContext = new MainViewModel(navigationStore)
+            };
+            MainWindow.Show();
+        }
+    }
+}
