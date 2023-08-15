@@ -17,10 +17,10 @@ namespace NavigationMVVM.ViewModels
         public string UserName => _account.CurrentAccount?.UserName;
         public string Email => _account.CurrentAccount?.Email;
         public ICommand NavigateHomeCommand { get; }
-        public AccountViewModel(AccountStore accountStore, NavigationStore navigationStore)
+        public AccountViewModel(AccountStore accountStore, INavigationService<HomeViewModel> homeNavigationService)
         {
             _account = accountStore;
-            NavigateHomeCommand = new NavigateCommand<HomeViewModel>(new NavigationService<HomeViewModel>(navigationStore, () => new HomeViewModel(accountStore, navigationStore)));
+            NavigateHomeCommand = new NavigateCommand<HomeViewModel>(homeNavigationService);
         }
     }
 }

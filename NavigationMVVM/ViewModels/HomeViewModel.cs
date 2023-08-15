@@ -12,11 +12,11 @@ namespace NavigationMVVM.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {
-        public string WelcomeMessage => "Welcome!";
+        public string WelcomeMessage => "Welcome!";        
         public ICommand NavigateAccountCommand { get; }
-        public HomeViewModel(AccountStore accountStore, NavigationStore navigateStore)
-        {
-            NavigateAccountCommand = new NavigateCommand<LoginViewModel>(new NavigationService<LoginViewModel>(navigateStore, () => new LoginViewModel(accountStore, navigateStore)));
+        public HomeViewModel(INavigationService<LoginViewModel> loginNavigationService)
+        {            
+            NavigateAccountCommand = new NavigateCommand<LoginViewModel>(loginNavigationService);
         }
     }
 }

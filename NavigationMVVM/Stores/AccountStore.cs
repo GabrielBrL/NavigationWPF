@@ -15,5 +15,6 @@ namespace NavigationMVVM.Stores
             get => _currentAccount;
             set => _currentAccount = value;
         }
+        public bool IsLoggedIn => CurrentAccount != null;
     }
 }
